@@ -1,6 +1,6 @@
 import { CssBaseline } from '@mui/material';
 import { StyledEngineProvider, ThemeProvider, createTheme } from '@mui/material/styles';
-import { Router, RouterProvider } from '@tanstack/react-router';
+import { RouterProvider, createRouter } from '@tanstack/react-router';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './main.css';
@@ -51,11 +51,10 @@ const theme = createTheme({
     },
   },
   components: {
-    // Customize MUI components here based on the theme
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 8, // Adjust based on your design guideline
+          borderRadius: 8,
         },
       },
     },
@@ -72,7 +71,7 @@ const theme = createTheme({
   },
 });
 
-const router = new Router({
+const router = createRouter({
   routeTree,
   defaultPreload: 'intent',
 });
