@@ -1,47 +1,42 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { createTheme, StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
-import './main.css'
-import { RouterProvider, Router } from '@tanstack/react-router';
-import { routeTree } from './routeTree.gen'
-
-const client = new ApolloClient({
-  uri: 'http://qnap-nas:8082/v1/graphql',
-  cache: new InMemoryCache(),
-});
+import { StyledEngineProvider, ThemeProvider, createTheme } from '@mui/material/styles';
+import { Router, RouterProvider } from '@tanstack/react-router';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './main.css';
+import { ApolloProvider } from './providers/ApolloProvider';
+import { TokenProvider } from './providers/TokenProvider';
+import { routeTree } from './routeTree.gen';
 
 const rootElement = document.getElementById('root');
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#6750A4',
-      light: '#EADDFF',
-      dark: '#21005D',
-      contrastText: '#FFFFFF',
+      light: '#6a9bff',
+      main: '#468ceb',
+      dark: '#0064c8',
+      contrastText: '#ffffff',
     },
     secondary: {
-      main: '#625B71',
-      light: '#E8DEF8',
-      dark: '#1D192B',
-      contrastText: '#FFFFFF',
+      light: '#ffffd5',
+      main: '#ffe7a3',
+      dark: '#cab773',
+      contrastText: '#000000',
     },
     error: {
-      main: '#B3261E',
-      contrastText: '#FFFFFF',
+      light: '#ffa48d',
+      main: '#e67460',
+      dark: '#b14536',
+      contrastText: '#ffffff',
     },
     background: {
-      default: '#FFFBFE',
-      paper: '#FFFBFE',
-    },
-    text: {
-      primary: '#1C1B1F',
-      secondary: '#625B71',
+      default: '#F4F7FC',
+      paper: '#F4F7FC',
     },
   },
   typography: {
-    fontFamily: "'Roboto', sans-serif",
+    fontFamily: '\'Inter\', sans-serif',
     button: {
       fontWeight: 500,
       size: '14px',
@@ -80,7 +75,7 @@ const theme = createTheme({
 const router = new Router({
   routeTree,
   defaultPreload: 'intent',
-})
+});
 
 declare module '@tanstack/react-router' {
   interface Register {
@@ -90,13 +85,15 @@ declare module '@tanstack/react-router' {
 
 ReactDOM.createRoot(rootElement!).render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
-      <StyledEngineProvider injectFirst>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <RouterProvider router={router} />
-        </ThemeProvider>
-      </StyledEngineProvider>
-    </ApolloProvider>
+    <TokenProvider>
+      <ApolloProvider>
+        <StyledEngineProvider injectFirst>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <RouterProvider router={router} />
+          </ThemeProvider>
+        </StyledEngineProvider>
+      </ApolloProvider>
+    </TokenProvider>
   </React.StrictMode>,
-)
+);

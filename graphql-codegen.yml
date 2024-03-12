@@ -1,0 +1,54 @@
+overwrite: true
+schema: 
+  - http://qnap-nas:8082/v1/graphql:
+      headers:
+        x-hasura-admin-secret: 123456
+documents: "src/**/*.graphql"
+generates:
+  src/graphql/types.ts:
+    plugins:
+      - add:
+          content: >
+            /* eslint-disable */
+
+            /**
+             * WARNING: THIS FILE IS AUTO-GENERATED, DO NOT EDIT IT DIRECTLY!
+             */
+
+            export type Nullable<T> = {
+              [P in keyof T]: T[P] | null
+            }
+      - "typescript"
+    config:
+      useTypeImports: true
+      typesPrefix: "GQL"
+      namingConvention:
+        typeNames: "change-case-all#pascalCase"
+        enumValues: "change-case-all#upperCase"
+        transformUnderscore: true
+  src/graphql/:
+    preset: near-operation-file
+    presetConfig:
+      baseTypesPath: types.ts
+      extension: .g.tsx
+    plugins:
+      - add:
+          content: >
+            /* eslint-disable */
+
+            /**
+             * WARNING: THIS FILE IS AUTO-GENERATED, DO NOT EDIT IT DIRECTLY!
+             */
+
+      - "typescript-operations"
+      - "typescript-react-apollo"
+    config:
+      useTypeImports: true
+      preResolveTypes: false
+      withHooks: true
+      typesPrefix: "GQL"
+      namingConvention: 
+        typeNames: "change-case-all#pascalCase"
+        enumValues: "change-case-all#upperCase"
+        transformUnderscore: true
+      
