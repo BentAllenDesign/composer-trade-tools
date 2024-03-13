@@ -30,7 +30,7 @@ export const MainLayout: React.FC = () => (
     {/* Passing logo label to endorse future development of global context switching */}
     <NavigationWrapper />
     <Box className="flex-grow flex flex-col relative">
-      <Header logoLabel='Maestro' />
+      <Header />
       <main className={clsx(mbp.main, display.main, size.main)}>
         <Outlet />
         <TanStackRouterDevtools position="bottom-right" />

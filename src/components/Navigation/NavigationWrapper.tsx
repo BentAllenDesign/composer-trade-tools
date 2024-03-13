@@ -1,4 +1,4 @@
-import { Box, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar } from '@mui/material';
+import { Box, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material';
 import { Link } from '@tanstack/react-router';
 import clsx from 'clsx';
 import React from 'react';
@@ -19,11 +19,11 @@ export const NavigationWrapper: React.FC = () => {
   return (
     <Drawer
       variant="permanent"
-      className='w-1/5 max-w-[400px] min-w-[200px]'
+      className='w-1/5 max-w-[300px] min-w-[200px]'
       sx={{
         [`& .MuiDrawer-paper`]: { 
           width: '20%',
-          maxWidth: '400px',
+          maxWidth: '300px',
           minWidth: '200px',
           boxSizing: 'border-box',
           background: 'white', 
@@ -37,10 +37,12 @@ export const NavigationWrapper: React.FC = () => {
           {features.map((value, idx) => (
             <ListItem key={`side-nav-feature-item-${value.label}-${idx}`} disablePadding>
               <ListItemButton LinkComponent={Link}>
-                <ListItemIcon className={clsx(value.active && 'text-primary')}>
+                <ListItemIcon className={clsx(value.active && 'text-primary', 'lg:text-xl 2xl:text-2xl')}>
                   {value.icon}
                 </ListItemIcon>
-                <ListItemText primary={value.label} className={clsx(value.active && 'text-primary')} />
+                <ListItemText>
+                  <Typography className={clsx(value.active && 'text-primary font-medium', 'lg:text-xl 2xl:text-2xl')}>{value.label}</Typography>
+                </ListItemText>
               </ListItemButton>
             </ListItem>
           ))}
