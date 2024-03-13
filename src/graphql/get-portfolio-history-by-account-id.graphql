@@ -1,0 +1,6 @@
+query GetPortfolioHistoryByAccountId($account_id: ID!) {
+  portfolioHistory: get_portfolio_history_by_account_id(account_id: $account_id) {
+    timestamps: series_unix_timestamps
+    values: series_values
+  }
+}

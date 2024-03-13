@@ -5,6 +5,7 @@ import React from 'react';
 
 type HeroProps = {
   processingTokenEntry: boolean;
+  tokenEntryError?: boolean;
   handleTokenChange: (value: string) => void;
 };
 
@@ -19,7 +20,7 @@ const text = {
   callToAction: 'text-xl lg:text-2xl',
 };
 
-export const Hero: React.FC<HeroProps> = React.forwardRef(({ processingTokenEntry, handleTokenChange, ...props }, ref) => {
+export const Hero: React.FC<HeroProps> = React.forwardRef(({ processingTokenEntry, tokenEntryError, handleTokenChange, ...props }, ref) => {
   const [tokenFieldValue, setTokenFieldValue] = React.useState<string>('');
   
   React.useEffect(() => {
@@ -32,13 +33,12 @@ export const Hero: React.FC<HeroProps> = React.forwardRef(({ processingTokenEntr
   }, [setTokenFieldValue]);
 
   return (
-    <Box ref={ref} {...props} className="relative">
+    <Box ref={ref} {...props} className="h-full">
       <Typography id="hero-subtitle" className={clsx(mbp.subtitle, text.subtitle)}>
         Meet
       </Typography>
       <Typography component="span" id="hero-title" className={clsx(text.title)}>
-        Maestr
-        <Box className="rounded-full inline-block ml-3 w-[100px] h-[100px] bg-secondary-600 animate-bounce"/>
+        Maestro
       </Typography>
       <br />
       <Typography className={text.description}>
@@ -56,7 +56,7 @@ export const Hero: React.FC<HeroProps> = React.forwardRef(({ processingTokenEntr
       <Box className='flex items-center relative gap-x-2'>
         <TextField
           type='password'
-          error={processingTokenEntry === false && tokenFieldValue.length > 0}
+          error={tokenEntryError || (!!tokenFieldValue.length && !processingTokenEntry)}
           helperText={
             !tokenFieldValue.length
               ? 'Paste your access token'

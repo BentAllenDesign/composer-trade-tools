@@ -1,0 +1,5 @@
+query GetPrimaryAccountId {
+  primaryAccount: get_primary_account_overview {
+    id
+  }
+}

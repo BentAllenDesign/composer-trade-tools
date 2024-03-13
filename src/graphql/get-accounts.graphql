@@ -1,0 +1,8 @@
+query GetAccounts {
+  accounts: get_accounts {
+    accountId: account_uuid
+    accountType: account_type
+    status
+    broker
+  }
+}

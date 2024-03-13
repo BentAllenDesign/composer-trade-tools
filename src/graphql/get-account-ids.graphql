@@ -1,8 +1,0 @@
-query GetAccountIds {
-  get_accounts {
-    accounts {
-      account_uuid
-      status
-    }
-  }
-}

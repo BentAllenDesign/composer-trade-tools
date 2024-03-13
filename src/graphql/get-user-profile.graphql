@@ -1,0 +1,7 @@
+query GetUserProfile {
+  userProfile: get_user_profile {
+    firstName: first_name
+    lastName: last_name
+    phoneNumber: phone_number
+  }
+}
