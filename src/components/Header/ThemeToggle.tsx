@@ -4,13 +4,9 @@ import React from 'react';
 import { useDarkMode } from 'usehooks-ts';
 
 export const ThemeToggle: React.FC = React.memo(() => {
-  const { isDarkMode, toggle } = useDarkMode({ localStorageKey: 'theme' });
-  // const themeValue = isDarkMode ? 'dark' : 'light';
-
-  // We don't care about the value, discarding it
-  // const [, setTheme] = useLocalStorage<string>('theme', themeValue);
-
-  // React.useEffect(() => { setTheme(themeValue); }, [themeValue, setTheme]);
+  const { isDarkMode, toggle } = useDarkMode();
+  
+  // TODO: Figure out some dark mode strategy
 
   return (
     <IconButton onClick={toggle}>
