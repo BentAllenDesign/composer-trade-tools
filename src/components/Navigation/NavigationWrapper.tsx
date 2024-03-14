@@ -1,5 +1,5 @@
-import { Box, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material';
-import { Link } from '@tanstack/react-router';
+import { Box, Chip, Divider, Drawer, Fade, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material';
+import { Link, useRouterState } from '@tanstack/react-router';
 import clsx from 'clsx';
 import React from 'react';
 import { useNavigationContext } from '../../state/global/NavigationContext';
@@ -7,7 +7,7 @@ import { Logo } from '../Header/Logo';
 
 export const NavigationWrapper: React.FC = () => {
   const navigationContext = useNavigationContext();
-
+  const { location } = useRouterState();
   const features = React.useMemo(() => 
     navigationContext.items.filter(item => item.type === 'FEATURE')
   , [navigationContext.items]); 
@@ -16,51 +16,68 @@ export const NavigationWrapper: React.FC = () => {
     navigationContext.items.filter(item => item.type === 'RESOURCE')
   , [navigationContext.items]);
 
+  const onRootPage = location.pathname == '/';
+
   return (
-    <Drawer
-      variant="permanent"
-      className='w-1/5 max-w-[300px] min-w-[200px]'
-      sx={{
-        [`& .MuiDrawer-paper`]: { 
-          width: '20%',
-          maxWidth: '300px',
-          minWidth: '200px',
-          boxSizing: 'border-box',
-          background: 'white', 
-        }}}
-    >
-      <Toolbar className='justify-center mt-2'>
-        <Logo label='Maestro' />
-      </Toolbar>
-      <Box sx={{ overflow: 'auto' }}>
-        <List>
-          {features.map((value, idx) => (
-            <ListItem key={`side-nav-feature-item-${value.label}-${idx}`} disablePadding>
-              <ListItemButton LinkComponent={Link}>
-                <ListItemIcon className={clsx(value.active && 'text-primary', 'lg:text-xl 2xl:text-2xl')}>
-                  {value.icon}
-                </ListItemIcon>
-                <ListItemText>
-                  <Typography className={clsx(value.active && 'text-primary font-medium', 'lg:text-xl 2xl:text-2xl')}>{value.label}</Typography>
-                </ListItemText>
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {resources.map((value, idx) => (
-            <ListItem key={`side-nav-resource-item-${value.label}-${idx}`} disablePadding>
-              <ListItemButton LinkComponent={Link}>
-                <ListItemIcon>
-                {value.icon}
-                </ListItemIcon>
-                <ListItemText primary={value.label} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      </Box>
-    </Drawer>
+    <Box className={clsx(!onRootPage && 'w-1/5')}>
+      <Fade in={!onRootPage} appear timeout={250}>
+        <Drawer
+          variant="permanent"
+          className={clsx(
+            'w-1/5',
+            '[&_.MuiDrawer-paper]:w-1/5',
+            '[&_.MuiDrawer-paper]:overflow-x-hidden',
+            '[&_.MuiDrawer-paper]:box-border',
+            '[&_.MuiDrawer-paper]:bg-white'
+          )}
+        >
+          <Toolbar className='justify-center mt-2 !justify-end !px-3'>
+            <Box className="flex w-72">
+              <Logo />
+            </Box>
+          </Toolbar>
+          <Box className="overflow-x-visible flex flex-col items-end">
+            <List className='w-full'>
+              {features.map((value, idx) => (
+                <ListItem key={`side-nav-feature-item-${value.label}-${idx}`} disablePadding>
+                    <ListItemButton LinkComponent={Link} className={clsx(value.active && '!border-r-2 !border-black','flex justify-end')}>
+                      <Box className="overflow-x-hidden overflow-y-auto flex items-center w-72">
+                        <ListItemIcon className={clsx(
+                          value.active && 'text-primary', 
+                          '[&_.MuiSvgIcon-root]:lg:text-4xl',
+                        )}>
+                          {value.icon}
+                        </ListItemIcon>
+                        <ListItemText className="my-2 md:my-3 lg:my-4">
+                          <Typography className={clsx(value.active && 'text-primary font-medium', 'text-xl lg:text-2xl')}>{value.label}</Typography>
+                        </ListItemText>
+                      </Box>
+                    </ListItemButton>
+                </ListItem>
+              ))}
+            </List>
+            <Divider className='w-full flex justify-end [&_.MuiDivider-wrapper]:place-self-end'>
+              <Chip label="Resources" size="small" className='bg-primary-100 text-primary-900 font-medium uppercase tracking-widest' />
+            </Divider>
+            <List className='w-full'>
+              {resources.map((value, idx) => (
+                <ListItem key={`side-nav-resource-item-${value.label}-${idx}`} disablePadding>
+                  <ListItemButton LinkComponent={Link} className='flex justify-end'>
+                    <Box className="overflow-x-hidden overflow-y-auto flex items-center w-72 pl-1">
+                      <ListItemIcon>
+                      {value.icon}
+                      </ListItemIcon>
+                      <ListItemText>
+                        <Typography className='lg:text-lg xl:text-xl'>{value.label}</Typography>
+                      </ListItemText>
+                    </Box>
+                  </ListItemButton>
+                </ListItem>
+              ))}
+            </List>
+          </Box>
+        </Drawer>
+      </Fade>
+    </Box>
   );
 };

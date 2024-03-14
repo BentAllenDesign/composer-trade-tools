@@ -1,3 +1,5 @@
+import rfs from 'tailwindcss-rfs';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{html,js,ts,jsx,tsx}'],
@@ -5,6 +7,7 @@ export default {
   corePlugins: {
     preflight: false,
   },
+  darkMode: 'selector',
   theme: {
     extend: {
       colors: {
@@ -70,6 +73,8 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    rfs
+  ],
 };
 

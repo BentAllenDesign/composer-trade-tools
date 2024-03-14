@@ -1,11 +1,11 @@
 /// We're setting up the global User Context here
 import { makeVar, useReactiveVar } from '@apollo/client';
-import { GQLAccountDetail } from '../../graphql/types';
+import { GQLAccount } from '../../graphql/types';
 
 
 export type AccountContext = {
-  accounts?: GQLAccountDetail[];
-  activeAccountNumber?: string;
+  accounts?: GQLAccount[];
+  activeAccountId?: string;
 }
 
 // Mutable variable to store the account context

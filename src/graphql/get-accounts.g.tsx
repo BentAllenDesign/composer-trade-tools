@@ -15,8 +15,7 @@ export type GQLGetAccountsQuery = (
   { __typename?: 'query_root' }
   & { accounts: Array<Types.Maybe<(
     { __typename?: 'Account' }
-    & Pick<Types.GQLAccount, 'status' | 'broker'>
-    & { accountId: Types.GQLAccount['account_uuid'], accountType: Types.GQLAccount['account_type'] }
+    & Pick<Types.GQLAccount, 'account_uuid' | 'account_type' | 'status' | 'broker'>
   )>> }
 );
 
@@ -24,8 +23,8 @@ export type GQLGetAccountsQuery = (
 export const GetAccountsDocument = gql`
     query GetAccounts {
   accounts: get_accounts {
-    accountId: account_uuid
-    accountType: account_type
+    account_uuid
+    account_type
     status
     broker
   }

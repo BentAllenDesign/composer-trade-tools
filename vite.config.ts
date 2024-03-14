@@ -11,4 +11,12 @@ export default ({ mode }) => defineConfig({
   define: {
     'process.env': loadEnv(mode, process.cwd()),
   },
+  resolve: {
+    alias: [
+      {
+        find: './runtimeConfig',
+        replacement: './runtimeConfig.browser',
+      },
+    ]
+  },
 });
