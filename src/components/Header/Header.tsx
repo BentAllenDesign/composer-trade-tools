@@ -28,7 +28,7 @@ const special = {
   headerContainer: 'shadow-md',
 };
 
-export const Header: React.FC = () => {
+export const Header: React.FC = React.memo(() => {
   const { location } = useRouterState();
   const onRootPage = location.pathname == '/';
   return (
@@ -46,4 +46,4 @@ export const Header: React.FC = () => {
       </Fade>
     </Box>
   );
-};
+});

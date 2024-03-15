@@ -17,7 +17,10 @@ export type GQLGetPortfolioOverviewByAccountIdQuery = (
   { __typename?: 'query_root' }
   & { portfolioOverview?: Types.Maybe<(
     { __typename?: 'PortfolioOverview' }
-    & { netDeposits: Types.GQLPortfolioOverview['net_deposits'], pendingDeploysCash: Types.GQLPortfolioOverview['pending_deploys_cash'], portfolioValue: Types.GQLPortfolioOverview['portfolio_value'], cumulativeReturn: Types.GQLPortfolioOverview['simple_return'], todaysDollarChange: Types.GQLPortfolioOverview['todays_dollar_change'], todaysPercentChange: Types.GQLPortfolioOverview['todays_percent_change'], totalCash: Types.GQLPortfolioOverview['total_cash'], totalUnallocatedCash: Types.GQLPortfolioOverview['total_unallocated_cash'] }
+    & Pick<Types.GQLPortfolioOverview, 'net_deposits' | 'pending_deploys_cash' | 'portfolio_value' | 'simple_return' | 'todays_dollar_change' | 'todays_percent_change' | 'total_cash' | 'total_unallocated_cash'>
+  )>, portfolioHistory?: Types.Maybe<(
+    { __typename?: 'PortfolioHistory' }
+    & Pick<Types.GQLPortfolioHistory, 'series_unix_timestamps' | 'series_values'>
   )> }
 );
 
@@ -25,14 +28,18 @@ export type GQLGetPortfolioOverviewByAccountIdQuery = (
 export const GetPortfolioOverviewByAccountIdDocument = gql`
     query GetPortfolioOverviewByAccountId($account_id: ID!) {
   portfolioOverview: get_portfolio_overview_by_account_id(account_id: $account_id) {
-    netDeposits: net_deposits
-    pendingDeploysCash: pending_deploys_cash
-    portfolioValue: portfolio_value
-    cumulativeReturn: simple_return
-    todaysDollarChange: todays_dollar_change
-    todaysPercentChange: todays_percent_change
-    totalCash: total_cash
-    totalUnallocatedCash: total_unallocated_cash
+    net_deposits
+    pending_deploys_cash
+    portfolio_value
+    simple_return
+    todays_dollar_change
+    todays_percent_change
+    total_cash
+    total_unallocated_cash
+  }
+  portfolioHistory: get_portfolio_history_by_account_id(account_id: $account_id) {
+    series_unix_timestamps
+    series_values
   }
 }
     `;

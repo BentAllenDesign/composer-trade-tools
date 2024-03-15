@@ -1,0 +1,8 @@
+# Ignore artifacts:
+.vscode
+.yarn
+dist
+node_modules
+public
+src/graphql
+src/assets

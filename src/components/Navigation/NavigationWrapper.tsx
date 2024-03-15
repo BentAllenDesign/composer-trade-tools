@@ -44,12 +44,12 @@ export const NavigationWrapper: React.FC = () => {
                       <Box className="overflow-x-hidden overflow-y-auto flex items-center w-72">
                         <ListItemIcon className={clsx(
                           value.active && 'text-primary', 
-                          '[&_.MuiSvgIcon-root]:lg:text-4xl',
+                          '[&_.MuiSvgIcon-root]:lg:text-3xl',
                         )}>
                           {value.icon}
                         </ListItemIcon>
-                        <ListItemText className="my-2 md:my-3 lg:my-4">
-                          <Typography className={clsx(value.active && 'text-primary font-medium', 'text-xl lg:text-2xl')}>{value.label}</Typography>
+                        <ListItemText className="my-2 md:my-3">
+                          <Typography className={clsx(value.active && 'text-primary font-semibold', 'font-lighttext-lg lg:text-xl')}>{value.label}</Typography>
                         </ListItemText>
                       </Box>
                     </ListItemButton>
@@ -68,7 +68,7 @@ export const NavigationWrapper: React.FC = () => {
                       {value.icon}
                       </ListItemIcon>
                       <ListItemText>
-                        <Typography className='lg:text-lg xl:text-xl'>{value.label}</Typography>
+                        <Typography className='text-md'>{value.label}</Typography>
                       </ListItemText>
                     </Box>
                   </ListItemButton>

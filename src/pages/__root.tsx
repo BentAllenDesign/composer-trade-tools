@@ -13,7 +13,7 @@ const mbp = {
 
 const display = {
   appContainer: 'flex overflow-x-hidden',
-  main: 'flex flex-col flex-grow',
+  main: 'flex flex-col',
 };
 
 const size = {
@@ -29,7 +29,7 @@ export const MainLayout: React.FC = () => (
   <div className={clsx(display.appContainer, size.appContainer, color.appContainer)}>
     {/* Passing logo label to endorse future development of global context switching */}
     <NavigationWrapper />
-    <Box className="flex-grow flex flex-col relative">
+    <Box className="w-4/5 flex flex-col relative">
       <Header />
       <main className={clsx(mbp.main, display.main, size.main)}>
         <Outlet />

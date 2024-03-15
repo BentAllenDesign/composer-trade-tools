@@ -4,7 +4,7 @@ import RestoreIcon from '@mui/icons-material/Restore';
 import { BottomNavigation, BottomNavigationAction, Box } from '@mui/material';
 import React, { Fragment } from 'react';
 
-export const Footer: React.FC = () => {
+export const Footer: React.FC = React.memo(() => {
   return (
     <Fragment>
       <BottomNavigation
@@ -22,4 +22,4 @@ export const Footer: React.FC = () => {
       </Box>
     </Fragment>
   );
-};
+});
