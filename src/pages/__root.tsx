@@ -33,7 +33,7 @@ export const MainLayout: React.FC = () => (
     )}
   >
     <NavigationWrapper />
-    <Box className="w-4/5 flex flex-col relative">
+    <Box className="w-full flex flex-col relative overflow-x-hidden">
       <Header />
       <main className={clsx(mbp.main, display.main)}>
         <Outlet />

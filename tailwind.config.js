@@ -1,3 +1,4 @@
+import tailwindGradientMask from 'tailwind-gradient-mask-image';
 import rfs from 'tailwindcss-rfs';
 
 /** @type {import('tailwindcss').Config} */
@@ -74,7 +75,8 @@ export default {
     },
   },
   plugins: [
-    rfs
+    rfs,
+    tailwindGradientMask
   ],
 };
 

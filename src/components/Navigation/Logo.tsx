@@ -10,18 +10,18 @@ const mbp = {
 
 const display = {
   logoContainer: "flex justify-center items-center",
-  logoGraphicContainer: "hidden md:flex items-center",
+  logoGraphicContainer: "flex items-center",
 };
 
 const size = {
   logoText: "h-full",
   logoGraphicContainer: "h-full",
-  logoGraphic: "h-8 w-8 xl:h-10 xl:w-10",
+  logoGraphic: "h-8 w-8",
 };
 
 const text = {
   logoText:
-    "font-display text-4xl xl:text-5xl text-gray-800 tracking-tighter no-underline",
+    "font-display text-4xl text-gray-800 tracking-tighter no-underline",
 };
 
 const special = {
